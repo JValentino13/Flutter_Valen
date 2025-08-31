@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'menu.dart';
 import 'home.dart';
 
 void main() {
@@ -120,7 +121,7 @@ class Login extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     contex,
-                    MaterialPageRoute(builder: (contex)=>Home()),
+                    MaterialPageRoute(builder: (contex)=>Menu()),
                   );
                 }, 
                 child: const Text(

@@ -1,23 +1,25 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import 'package:jonathan_valen/data.dart';
 import 'main.dart';
-import 'card.dart' as card;
-import 'profile.dart' as profile;
-import 'explore.dart' as explore;
-import 'home.dart' as home;
+import 'menu.dart';
+import 'item_widget.dart';
+
 
 void main() {
   runApp(MaterialApp(
     title: "Apen Belajar",
+    theme: ThemeData(
+      fontFamily: 'Poppins',
+    ),
     home: Home(),
   ));
 }
 
 //Home Page
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
-
-  @override
-    BottomTabBar createState() => new BottomTabBar();
 
   @override
   Widget build(BuildContext context){
@@ -57,45 +59,83 @@ class Home extends StatefulWidget {
           )
         ],
       ),
-      drawer: const NavigationDrawer(), //Connect Sidebar
-      body: Column(
+      body: SingleChildScrollView(
+        child: Container(
+        child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-        Expanded(
-          flex: 2,
+        Container(
           child: Container(
-
             padding: EdgeInsets.all(25),
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50)
               ),
-              elevation: 4,
-              color: Color.fromRGBO(128, 203, 200, 0.857),
-              child: Row(
-                children: [
-                  Padding(padding: EdgeInsets.only(left: 30)),
-                  Column(
+              elevation: 6, 
+              child: Container(
+                height: 200,
+                child: Stack( 
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadiusGeometry.circular(50),
+                      child: Opacity(
+                        opacity: 0.7,
+                        child: Image.asset(
+                        'assets/images/bg.jpg',
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                        ),
+                      
+                    ),
+                Row(
+                  children: [
+                  Padding(padding: EdgeInsets.only(left: 10)),
+                  Container(
+                    height: 180,
+                    width: 330,
+                    margin: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.only(left: 15.35),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50)
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 50, left: 35)),
-                      Text(
+                      Padding(padding: EdgeInsets.only(top: 25, left: 35)),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: const Color.fromARGB(126, 255, 255, 255), width: 1),
+                          borderRadius: BorderRadius.circular(15)
+                        ),
+                      child: Text(
                         'New Collection',
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                          backgroundColor: Colors.white,
                         ),
                         ),
+                      ),
+                      
                         SizedBox(height: 8,),
                       Text(
                         'The newest fish species to ',
                         style: TextStyle(
                           fontSize: 13,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       Text(
                         'add to your collection',
                         style: TextStyle(
                           fontSize: 13,
+                          fontWeight: FontWeight.bold
                         ),
                         ),
                         SizedBox(height: 12,),
@@ -104,137 +144,92 @@ class Home extends StatefulWidget {
                           'Show Now',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
+                            color:  Color.fromRGBO(128, 203, 200, 1)
                           ),
                           ),
                         onPressed: () {},
-                      )
+                      ),
+                      SizedBox(height: 10,)
                     ],
                   ),
                   Image.asset(
                     'assets/images/Untitled design.png',
                     fit: BoxFit.cover,
                     height: 150,
-                    width: 150,
+                    width: 120,
                     )
+                      ],
+                    ),
+                  )
+                  
                 ],
               ),
+                  ],
+                )
+              )
             ),
           )
           ),
         
         //Category Menu
-        Expanded( 
-          child: GridView.count(
-            physics: NeverScrollableScrollPhysics(),
-            crossAxisCount: 3,
-            padding: EdgeInsets.all(22),
-            children: <Widget>[ 
-              //Varian Ikan
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35)
+        Container( 
+          height: 50,
+          padding: EdgeInsets.only(left: 25, right: 25),
+          child: Row(
+            children: [
+                //Varian Ikan
+              ElevatedButton.icon(
+                icon: Image.asset(
+                  'assets/logos/goldfish.png', 
+                  scale: 20,),
+                onPressed: () {
+                
+                },
+                label: Text(
+                  'Fish',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold
                 ),
-                child: InkWell(
-                  onTap: () {},
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(
-                          'assets/logos/goldfish.png',
-                          scale: 10,
-                        ),
-                        SizedBox(height: 5,),
-                        Text(
-                          'Various',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
-                          ),
-                        Text(
-                          'Fish',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
-                          )
-                      ],
-                    ),
-                  ),
-                ),
+              )
               ),
+              SizedBox(width: 7,),
 
-            //Alat Mancing
-             Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35)
+              ElevatedButton.icon(
+                icon: Image.asset(
+                  'assets/logos/fishing-rod.png', 
+                  scale: 20,),
+                onPressed: () {
+                
+                },
+                label: Text(
+                  'Tools',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold
                 ),
-                child: InkWell(
-                  onTap: () {},
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(
-                          'assets/logos/fishing-rod.png',
-                          scale: 10,
-                        ),
-                        SizedBox(height: 5,),
-                        Text(
-                          'Fishing',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
-                          ),
-                        Text(
-                          'Tools',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
-                          )
-                      ],
-                    ),
-                  ),
-                ),
+              )
               ),
+              SizedBox(width: 7,),
 
-            //Akuarium
-            Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35)
+              ElevatedButton.icon(
+                icon: Image.asset(
+                  'assets/logos/aquarium.png', 
+                  scale: 20,),
+                onPressed: () {
+                
+                },
+                label: Text(
+                  'Aquarium',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold
                 ),
-                child: InkWell(
-                  onTap: () {},
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(
-                          'assets/logos/aquarium.png',
-                          scale: 10,
-                        ),
-                        SizedBox(height: 5,),
-                        Text(
-                          'Various',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
-                          ),
-                        Text(
-                          'Aquariums',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
-                          )
-                      ],
-                    ),
-                  ),
-                ),
+              )
               ),
             ],
-            ),
+          )
           ),
-        SizedBox(height: 30,),
-
         
         Row(
           children: [
@@ -259,166 +254,26 @@ class Home extends StatefulWidget {
         ),
 
         //Recomen Item
-        Expanded(
-          flex: 2,
-          child: GridView.count(
-            crossAxisCount: 3,
-            padding: const EdgeInsets.all(25),
-            children: <Widget>[
-              Card(
-                child: InkWell(
-                  onTap: () {},
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                      ],
-                    ),
-                  ),
+        Container(
+          height: 400,
+          child: Container(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 6,
+                childAspectRatio: 0.6,
                 ),
-              ),
-            ],
+                itemBuilder: (context, index) {
+                  return ItemWidget(product: fishData[index]);
+                },
+                itemCount: fishData.length,
+          ),
           )
           ),
         ]
       )
-    );
-  }
-}
-
-//Bagian Sidebar
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({ Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => Drawer(
-    child: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          buildHeader(context),
-          buildMenuItems(context),
-        ],
       ),
-      ),
-  );
-
-  Widget buildHeader(BuildContext context) => Container(
-    color: const Color.fromRGBO(128, 203, 201, 1),
-    padding: EdgeInsets.only(
-      top: MediaQuery.of(context).padding.top,
-    ),
-    child: Column(
-      children: const[
-        CircleAvatar(
-          radius: 51,
-          backgroundImage: AssetImage("assets/images/p.png"),
-        ),
-        SizedBox(height: 12,),
-        Text(
-          'Jonathan Valentino',
-          style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        Text(
-          'Orang Ganteng',
-          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
-        ),
-        SizedBox(height: 15,),
-      ],
-    ),
-  );
-
-  Widget buildMenuItems(BuildContext context) => Container(
-    padding: const EdgeInsets.all(24), 
-    child: Wrap(
-      runSpacing: 10,
-      children: [
-        ListTile(
-          leading: const Icon(Icons.person),
-          title: const Text('My Profile'),
-          onTap: () {},
-        ),
-        const Divider(color: Colors.black,),
-        ListTile(
-          leading: const Icon(Icons.home_outlined),
-          title: const Text('Home'),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-              builder: (context) => const Home(),
-            ));
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.search_sharp),
-          title: const Text('Explore'),
-          onTap: () {},
-        ),
-        ListTile(
-          leading: const Icon(Icons.shopping_cart),
-          title: const Text('My Transaction'),
-          onTap: () {},
-        ),
-        const Divider(color: Colors.black),
-        ListTile(
-          leading: const Icon(Icons.logout_rounded),
-          title: const Text('Logout'),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-              builder: (context) => const Login(),
-            ));
-            }
-        ),
-      ],
-    ),
-  );
-}
-
-//Tab Bar
-class BottomTabBar extends State<Home> with SingleTickerProviderStateMixin {
-
-  late TabController controller;
-
-  @override
-    void initState() {
-      controller = TabController(length: 4, vsync: this);
-      super.initState();
-    }
-
-  @override
-   void dispose(){
-    controller.dispose();
-    super.dispose();
-   }
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: AppBar(
-        bottom: TabBar(
-          controller: controller,
-          tabs: <Widget>[
-              Tab(icon: Icon(Icons.home), text: "Home",),
-              Tab(icon: Icon(Icons.search), text: "Explore",),
-              Tab(icon: Icon(Icons.shopping_cart), text: "My Card",),
-              Tab(icon: Icon(Icons.person), text: "My Profile",),
-          ]
-        ),
-      ),
-
-      body: TabBarView(
-        controller: controller,
-        children: <Widget>[
-          home.Home(),
-          explore.Explore(),
-          card.Card(),
-          profile.Profile()
-        ]
-      ),
+      )
     );
   }
 }
