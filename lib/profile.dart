@@ -5,8 +5,10 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("Ini halaman Profile")),
+    return Scaffold(
+      body: Center(
+        child: Text("Ini halaman Profile"),
+      ),
     );
   }
 }

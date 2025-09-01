@@ -73,7 +73,7 @@ class ItemWidget extends StatelessWidget {
             height: 2,
             color: Colors.grey,
           ),
-          SizedBox(height: 5,),
+          SizedBox(height: 3,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -83,10 +83,11 @@ class ItemWidget extends StatelessWidget {
                     Icons.shopping_cart,
                     size: 11,
                   ),
-                  SizedBox(height: 2,),
+                  SizedBox(height: 4,),
                   Text(
                     'Beli',
                     style: TextStyle(
+                      fontSize: 13,
                     ),
                   ),
                   SizedBox(height: 3,),

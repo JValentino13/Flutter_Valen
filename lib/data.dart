@@ -33,4 +33,25 @@ final List<Product> fishData = [
   'assets/fish/sushi.jpg', 
   'An Beutifull Fish'
   ),
+
+  Product(
+  'Blue Popcorn', 
+  'Rp. 500.000,00', 
+  'assets/fish/pop.jpg', 
+  'An Beutifull Fish'
+  ),
+
+  Product(
+  'Blue Tiger', 
+  'Rpl. 200.000,00', 
+  'assets/fish/tiger.jpg', 
+  'An Beutifull Fish'
+  ),
+
+  Product(
+  'Nature Green', 
+  'Rpl. 599.000,00', 
+  'assets/fish/nature.jpg', 
+  'An Beutifull Fish'
+  ),
 ];

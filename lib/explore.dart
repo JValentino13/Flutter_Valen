@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'menu.dart';
 
 class Explore extends StatelessWidget {
   const Explore({super.key});
 
-  @override
+ @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("Ini halaman Explore")),
+    return Scaffold(
+      body: Center(
+        child: Text("Ini halaman Explore"),
+      ),
     );
   }
 }

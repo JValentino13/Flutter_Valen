@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import 'login.dart';
 import 'home.dart' as home;
 import 'explore.dart' as explore;
 import 'cardPage.dart' as card;
 import 'profile.dart' as profile;
-
-
-void main() {
-  runApp(MaterialApp(
-    title: "Apen Belajar",
-    home: Menu(),
-  ));
-}
-
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -25,7 +16,7 @@ class Menu extends StatefulWidget {
 class _TabBar extends State<Menu>{
   int _currentIndex = 0;
 
-    final List<Widget> _pages = const [
+    final List<Widget> _pages =[
     home.Home(),
     explore.Explore(),
     card.CardPage(),
@@ -35,8 +26,20 @@ class _TabBar extends State<Menu>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const NavigationDrawer(), //Connect Sidebar
-      body: _pages[_currentIndex],
+      drawer: NavigationValen(
+        OnItemSelected: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        }
+      ),
+      body: Builder(
+  builder: (context) {
+    print("Menampilkan index $_currentIndex => ${_pages[_currentIndex]}");
+    return _pages[_currentIndex];
+  },
+),
+
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadiusGeometry.only(topRight: Radius.circular(24), topLeft: Radius.circular(24)),
         child: BottomNavigationBar(
@@ -64,8 +67,9 @@ class _TabBar extends State<Menu>{
 }
 
 //Bagian Sidebar
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({super.key});
+class NavigationValen extends StatelessWidget {
+  final Function(int) OnItemSelected;
+  const NavigationValen({super.key, required this.OnItemSelected});
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -113,7 +117,14 @@ class NavigationDrawer extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.person),
           title: const Text('My Profile'),
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+              builder: (context) => profile.Profile(),
+            ));
+          },
         ),
         const Divider(color: Colors.black,),
         ListTile(
@@ -121,22 +132,36 @@ class NavigationDrawer extends StatelessWidget {
           title: const Text('Home'),
           onTap: () {
             Navigator.pop(context);
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-              builder: (context) => const Menu(),
+              builder: (context) => home.Home(),
             ));
           },
         ),
         ListTile(
           leading: const Icon(Icons.search_sharp),
           title: const Text('Explore'),
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+              builder: (context) => explore.Explore(),
+            ));
+          },
         ),
         ListTile(
           leading: const Icon(Icons.shopping_cart),
           title: const Text('My Transaction'),
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+              builder: (context) => card.CardPage(),
+            ));
+          },
         ),
         const Divider(color: Colors.black),
         ListTile(
@@ -144,7 +169,7 @@ class NavigationDrawer extends StatelessWidget {
           title: const Text('Logout'),
           onTap: () {
             Navigator.pop(context);
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
               builder: (context) => const Login(),

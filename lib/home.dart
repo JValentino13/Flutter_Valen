@@ -1,21 +1,8 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:jonathan_valen/data.dart';
-import 'main.dart';
+import 'package:jonathan_valen/login.dart';
 import 'menu.dart';
 import 'item_widget.dart';
-
-
-void main() {
-  runApp(MaterialApp(
-    title: "Apen Belajar",
-    theme: ThemeData(
-      fontFamily: 'Poppins',
-    ),
-    home: Home(),
-  ));
-}
 
 //Home Page
 class Home extends StatelessWidget {
@@ -24,6 +11,11 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      drawer:  NavigationValen(
+        OnItemSelected: (index) {
+          Navigator.pop(context);
+          },
+          ), //Connect Sidebar
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
@@ -97,7 +89,7 @@ class Home extends StatelessWidget {
                     margin: EdgeInsets.only(top: 10),
                     padding: EdgeInsets.only(left: 15.35),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color.fromRGBO(128, 203, 200, 0.861),
                       borderRadius: BorderRadius.circular(50)
                     ),
                     child: Row(
@@ -255,9 +247,10 @@ class Home extends StatelessWidget {
 
         //Recomen Item
         Container(
-          height: 400,
           child: Container(
             child: GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 mainAxisSpacing: 6,
