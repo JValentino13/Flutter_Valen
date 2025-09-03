@@ -6,7 +6,8 @@ import 'cardPage.dart' as card;
 import 'profile.dart' as profile;
 
 class Menu extends StatefulWidget {
-  const Menu({Key? key}) : super(key: key);
+  final int defaultPage;
+  const Menu({super.key, this.defaultPage = 0});
 
   @override
   _TabBar createState() => new _TabBar();
@@ -14,7 +15,7 @@ class Menu extends StatefulWidget {
 }
 
 class _TabBar extends State<Menu>{
-  int _currentIndex = 0;
+  late int _currentIndex;
 
     final List<Widget> _pages =[
     home.Home(),
@@ -22,6 +23,12 @@ class _TabBar extends State<Menu>{
     card.CardPage(),
     profile.Profile()
   ];
+
+  @override
+  void initState(){
+    super.initState();
+      _currentIndex = widget.defaultPage;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +129,7 @@ class NavigationValen extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-              builder: (context) => profile.Profile(),
+              builder: (context) => Menu(defaultPage: 3,),
             ));
           },
         ),
@@ -135,7 +142,7 @@ class NavigationValen extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-              builder: (context) => home.Home(),
+              builder: (context) => Menu(defaultPage: 0,),
             ));
           },
         ),
@@ -147,7 +154,7 @@ class NavigationValen extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-              builder: (context) => explore.Explore(),
+              builder: (context) => Menu(defaultPage: 1,),
             ));
           },
         ),
@@ -159,7 +166,7 @@ class NavigationValen extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-              builder: (context) => card.CardPage(),
+              builder: (context) => Menu(defaultPage: 2,),
             ));
           },
         ),
@@ -172,7 +179,7 @@ class NavigationValen extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-              builder: (context) => const Login(),
+              builder: (context) => Login(),
             ));
             }
         ),

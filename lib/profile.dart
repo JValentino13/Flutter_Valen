@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Menu.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -6,8 +7,45 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("Ini halaman Profile"),
+      drawer:  NavigationValen(
+        OnItemSelected: (index) {
+          Navigator.pop(context);
+          },
+          ), //Connect Sidebar
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: const Text(
+          'Profile', 
+          style: TextStyle(
+            fontWeight: FontWeight.bold),
+          ),
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 15, left: 0),
+            child: Row(
+              children: [
+                const Icon(
+                    Icons.search,
+                    size: 28,
+                    color: Colors.black,
+                    weight: 800,
+                    ),
+
+                IconButton(
+                  icon: const Icon(
+                    Icons.person,
+                    size: 28,
+                    color: Colors.black,
+                    weight: 800,
+                    ),
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
