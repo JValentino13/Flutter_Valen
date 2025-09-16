@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:jonathan_valen/data.dart';
-import 'package:jonathan_valen/login.dart';
+import 'Json.dart';
 import 'menu.dart';
 import 'item_widget.dart';
 
 //Home Page
-class Home extends StatelessWidget {
+class Home extends StatefulWidget{
   const Home({Key? key}) : super(key: key);
+
+  @override
+  _Home createState() => new _Home();
+}
+
+class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context){
@@ -139,7 +145,12 @@ class Home extends StatelessWidget {
                             color:  Color.fromRGBO(128, 203, 200, 1)
                           ),
                           ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context)=>const JsonList()),
+                          );
+                        }, 
                       ),
                       SizedBox(height: 10,)
                     ],

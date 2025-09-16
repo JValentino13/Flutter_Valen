@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'Menu.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login ({super.key});
+
+  @override
+  State<Login> createState() => _Login();
+}
+
+class _Login extends State<Login> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
 //Google Account PopUp
   void _showPopup(BuildContext context) {
@@ -11,7 +19,43 @@ class Login extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Google Account"),
-          content: const Text("Pilih Akun Google Anda!"),
+          content: Container(
+            height: 140,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Image.asset('assets/images/vish.png', scale: 5, ),
+                    Text("Pilih Akun Google Anda!"),
+                  ]
+                ),
+                SizedBox(height: 10,),
+                Divider(color: Colors.black,),
+                SizedBox(height: 15,),
+                Padding(padding: EdgeInsetsGeometry.only(left: 50)),
+                Row(
+                  children: [
+                    Padding(padding: EdgeInsetsGeometry.only(left: 30)),
+                    ClipOval(
+                      child: Image.asset(
+                        "assets/images/p.png",
+                        width: 50, 
+                        height: 50,
+                        fit: BoxFit.cover, 
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Column(
+                      children: [
+                        Text("Jonathan Valentino", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),),
+                        Text('jonathan13@gmail.com', style: TextStyle(fontSize: 10),)
+                      ]
+                    ),
+                  ]
+                )
+              ],
+            ),
+          ),
           actions: [
             TextButton(
               child: const Text("Tutup"),
@@ -29,6 +73,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext contex) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(title: 
       const Text(
         'Login Page', 
@@ -38,7 +83,9 @@ class Login extends StatelessWidget {
           ),
           leading: const Icon(Icons.pages),
           ),
-      body: Center(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -46,6 +93,7 @@ class Login extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Padding(padding: EdgeInsetsGeometry.only(top: 60)),
                   const Text(
                     'Continue',
                     style: TextStyle(
@@ -75,6 +123,7 @@ class Login extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 15,
                 ),
+                controller: usernameController,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(24),
                   labelText: 'Username',
@@ -93,7 +142,8 @@ class Login extends StatelessWidget {
               child : TextField(
                 style: const TextStyle(
                   fontSize: 15,
-                ),
+                ), 
+                controller: passwordController,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(24),
                   labelText: 'Password',
@@ -105,17 +155,33 @@ class Login extends StatelessWidget {
             ),
 
             const SizedBox(height: 10,),
-
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromRGBO(128, 203, 201, 1),
               ),
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  String username = usernameController.text;
+                  String password = passwordController.text;
+
+                  if (username == "admin" && password == "123") {
+                    ScaffoldMessenger.of(contex).showSnackBar(
+                      SnackBar(content: Text("Login berhasil!"),
+                      backgroundColor: Colors.green,
+                      ),
+                    );
+                    Navigator.pushReplacement(
                     contex,
                     MaterialPageRoute(builder: (contex)=>Menu()),
                   );
-                }, 
+                  } else {
+                    ScaffoldMessenger.of(contex).showSnackBar(
+                      SnackBar(
+                        content: Text("Username atau password salah!"),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                },
                 child: const Text(
                   'Login',
                   style: TextStyle(
@@ -159,6 +225,8 @@ class Login extends StatelessWidget {
           ],
         )
       ),
+        ),
+      )
     );
   }
 }
